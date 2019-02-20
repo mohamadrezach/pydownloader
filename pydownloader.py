@@ -10,7 +10,7 @@ try:
 	from requests import get,head,session
 except Exception as e:
 	print(e)
-	print("you need requests library :\nsudo pip3 install requests")
+	print("You need requests library so run below  :\nsudo pip3 install requests")
 	quit()
 class _downloader(Thread):
 	__instance=None
