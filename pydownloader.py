@@ -3,11 +3,15 @@ from optparse import OptionParser
 from threading import Thread
 from os import path,_exit,name,environ,mkdir,chdir
 from time import sleep
-from requests import get,head,session
 from socket import socket
 from random import randint
 from urllib.parse import urlparse
-
+try:
+	from requests import get,head,session
+except Exception as e:
+	print(e)
+	print("you need requests library :\nsudo pip3 install requests")
+	quit()
 class _downloader(Thread):
 	__instance=None
 	def __init__(self,url,filename,size,resume,Accept_Ranges):
