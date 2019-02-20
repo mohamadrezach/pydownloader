@@ -229,8 +229,7 @@ if __name__=='__main__':
 	resume=options.resume
 	if(options.url is None):
 		p.error('url missed')
-	x=options.url.rstrip('/')
-	options.filename.rstrip('/')	
+	x=options.url.rstrip('/')	
 	url,filename=x,options.filename if options.filename != None else x.split('/')[-1]
 	main(url,filename,resume)		
 		
