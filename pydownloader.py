@@ -188,7 +188,10 @@ class identifier:
 		isKnown =True
 		if(not self.resume and path.exists(self.filename)):
 			print("\nFile exists : ",self.filename)
-			self.filename="C-"+str(randint(1000,9999))+'-'+self.filename
+			listname=self.filename.split('/')
+			pre="C-"+str(randint(1000,9999))
+			tmp='/'.join(listname[:-1])+"/"+pre+'-'+listname[-1]
+			self.filename=tmp if (len(listname))>1 else pre+"-"+self.filename
 		if(not self.resume and not path.exists(self.filename)):
 			self.f=open(self.filename,'wb')
 			self.f.close()
@@ -209,9 +212,9 @@ class identifier:
 			downloaded=Size_now//1000
 			if(isKnown==True):
 				x=(downloaded*100)/self.size
-				self.__printProgressBar(x, 100,self.size,speedd=speed,prefix = downloaded, suffix = 'Complete', length = self.progress_length)
+				self.__printProgressBar(x, 100,self.size,speedd=speed,prefix = downloaded, suffix = '', length = self.progress_length)
 			else:
-				self.__printInfinitiProgressBar(genObject=g,prefix=downloaded,speedd=speed,suffix="Complete",length=self.progress_length)
+				self.__printInfinitiProgressBar(genObject=g,prefix=downloaded,speedd=speed,suffix="",length=self.progress_length)
 
 def main(url,filename,resume):
 	objectOfidentifier=identifier.getInstance(url,filename,resume)
@@ -226,8 +229,8 @@ if __name__=='__main__':
 	resume=options.resume
 	if(options.url is None):
 		p.error('url missed')
-	x=options.url.rstrip('/')	
+	x=options.url.rstrip('/')
+	options.filename.rstrip('/')	
 	url,filename=x,options.filename if options.filename != None else x.split('/')[-1]
-	main(url,filename,resume)
-		
+	main(url,filename,resume)		
 		
